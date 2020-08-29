@@ -31,7 +31,11 @@ public class SignView extends View {
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
         paint.setStrokeWidth(10);
-        canvas.drawLine(0,0,100,100, paint);
+        for (int i=1; i<line.size(); i++) {
+            HashMap<String,Float> p0 = line.get(i-1);
+            HashMap<String,Float> p1 = line.get(i);
+            canvas.drawLine(p0.get("x"), p0.get("y"), p1.get("x"), p1.get("y"), paint);
+        }
     }
 
     @Override
@@ -41,6 +45,7 @@ public class SignView extends View {
         point.put("x", event.getX());
         point.put("y", event.getY());
         line.add(point);
+        invalidate();
         return true; //super.onTouchEvent(event);
     }
 }
