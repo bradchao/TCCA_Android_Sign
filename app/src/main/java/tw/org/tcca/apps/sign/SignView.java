@@ -11,10 +11,16 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+
 public class SignView extends View {
+    private LinkedList<HashMap<String,Float>> line;
+
     public SignView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
+        line = new LinkedList<>();
         setBackgroundColor(Color.YELLOW);
 
     }
@@ -31,6 +37,10 @@ public class SignView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         Log.v("bradlog", event.getX() + ":" + event.getY());
+        HashMap<String, Float> point = new HashMap<>();
+        point.put("x", event.getX());
+        point.put("y", event.getY());
+        line.add(point);
         return true; //super.onTouchEvent(event);
     }
 }
