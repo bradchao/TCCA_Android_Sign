@@ -17,4 +17,12 @@ public class MainActivity extends AppCompatActivity {
     public void clear(View view) {
         signView.clear();
     }
+
+    public void undo(View view) {
+        signView.undo();
+    }
+
+    public void redo(View view) {
+        signView.redo();
+    }
 }

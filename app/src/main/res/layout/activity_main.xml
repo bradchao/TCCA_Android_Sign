@@ -20,6 +20,18 @@
             android:text="Clear"
             android:onClick="clear"
             />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Undo"
+            android:onClick="undo"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Redo"
+            android:onClick="redo"
+            />
     </LinearLayout>
     <tw.org.tcca.apps.sign.SignView
         android:id="@+id/signView"

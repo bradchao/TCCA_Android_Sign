@@ -15,12 +15,13 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class SignView extends View {
-    private LinkedList<LinkedList<HashMap<String,Float>>> lines;
+    private LinkedList<LinkedList<HashMap<String,Float>>> lines, recycler;
 
     public SignView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
         lines = new LinkedList<>();
+        recycler = new LinkedList<>();
         setBackgroundColor(Color.YELLOW);
 
     }
@@ -53,6 +54,7 @@ public class SignView extends View {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             line = new LinkedList<>();
             lines.add(line);
+            recycler.clear();
         }else if(event.getAction() == MotionEvent.ACTION_MOVE){
             line = lines.getLast();
         }
@@ -69,6 +71,20 @@ public class SignView extends View {
     public void clear(){
         lines.clear();
         invalidate();
+    }
+
+    public void undo(){
+        if (lines.size()>0) {
+            recycler.add(lines.removeLast());
+            invalidate();
+        }
+    }
+
+    public void redo(){
+        if (recycler.size()>0) {
+            lines.add(recycler.removeLast());
+            invalidate();
+        }
     }
 
 }
