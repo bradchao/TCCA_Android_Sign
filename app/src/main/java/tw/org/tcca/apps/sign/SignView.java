@@ -31,11 +31,15 @@ public class SignView extends View {
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
         paint.setStrokeWidth(10);
-//        for (int i=1; i<line.size(); i++) {
-//            HashMap<String,Float> p0 = line.get(i-1);
-//            HashMap<String,Float> p1 = line.get(i);
-//            canvas.drawLine(p0.get("x"), p0.get("y"), p1.get("x"), p1.get("y"), paint);
-//        }
+
+        for (LinkedList<HashMap<String,Float>> line: lines) {
+            for (int i = 1; i < line.size(); i++) {
+                HashMap<String, Float> p0 = line.get(i - 1);
+                HashMap<String, Float> p1 = line.get(i);
+                canvas.drawLine(p0.get("x"), p0.get("y"), p1.get("x"), p1.get("y"), paint);
+            }
+        }
+
     }
 
     @Override
@@ -48,6 +52,7 @@ public class SignView extends View {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             line = new LinkedList<>();
+            lines.add(line);
         }else if(event.getAction() == MotionEvent.ACTION_MOVE){
             line = lines.getLast();
         }
