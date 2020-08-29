@@ -65,4 +65,10 @@ public class SignView extends View {
 
         return true; //super.onTouchEvent(event);
     }
+
+    public void clear(){
+        lines.clear();
+        invalidate();
+    }
+
 }
