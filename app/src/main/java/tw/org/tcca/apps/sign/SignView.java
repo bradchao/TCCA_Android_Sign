@@ -15,12 +15,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class SignView extends View {
-    private LinkedList<HashMap<String,Float>> line;
+    private LinkedList<LinkedList<HashMap<String,Float>>> lines;
 
     public SignView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
-        line = new LinkedList<>();
+        lines = new LinkedList<>();
         setBackgroundColor(Color.YELLOW);
 
     }
@@ -31,21 +31,27 @@ public class SignView extends View {
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
         paint.setStrokeWidth(10);
-        for (int i=1; i<line.size(); i++) {
-            HashMap<String,Float> p0 = line.get(i-1);
-            HashMap<String,Float> p1 = line.get(i);
-            canvas.drawLine(p0.get("x"), p0.get("y"), p1.get("x"), p1.get("y"), paint);
-        }
+//        for (int i=1; i<line.size(); i++) {
+//            HashMap<String,Float> p0 = line.get(i-1);
+//            HashMap<String,Float> p1 = line.get(i);
+//            canvas.drawLine(p0.get("x"), p0.get("y"), p1.get("x"), p1.get("y"), paint);
+//        }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.v("bradlog", event.getX() + ":" + event.getY());
-        HashMap<String, Float> point = new HashMap<>();
-        point.put("x", event.getX());
-        point.put("y", event.getY());
-        line.add(point);
-        invalidate();
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            Log.v("bradlog", "down");
+        }else if(event.getAction() == MotionEvent.ACTION_MOVE){
+            Log.v("bradlog", "move");
+        }
+
+//        HashMap<String, Float> point = new HashMap<>();
+//        point.put("x", event.getX());
+//        point.put("y", event.getY());
+//        line.add(point);
+//        invalidate();
+
         return true; //super.onTouchEvent(event);
     }
 }
