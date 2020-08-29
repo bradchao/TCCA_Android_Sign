@@ -40,17 +40,23 @@ public class SignView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        HashMap<String, Float> point = new HashMap<>();
+        point.put("x", event.getX());
+        point.put("y", event.getY());
+
+        LinkedList<HashMap<String,Float>> line = null;
+
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            Log.v("bradlog", "down");
+            line = new LinkedList<>();
         }else if(event.getAction() == MotionEvent.ACTION_MOVE){
-            Log.v("bradlog", "move");
+            line = lines.getLast();
         }
 
-//        HashMap<String, Float> point = new HashMap<>();
-//        point.put("x", event.getX());
-//        point.put("y", event.getY());
-//        line.add(point);
-//        invalidate();
+        if (line != null){
+            line.add(point);
+            invalidate();
+        }
+
 
         return true; //super.onTouchEvent(event);
     }
