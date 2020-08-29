@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -15,6 +16,7 @@ public class SignView extends View {
         super(context, attrs);
 
         setBackgroundColor(Color.YELLOW);
+
     }
 
     @Override
@@ -24,5 +26,11 @@ public class SignView extends View {
         paint.setColor(Color.BLUE);
         paint.setStrokeWidth(10);
         canvas.drawLine(0,0,100,100, paint);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.v("bradlog", event.getX() + ":" + event.getY());
+        return true; //super.onTouchEvent(event);
     }
 }
